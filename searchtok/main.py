@@ -4,6 +4,9 @@ import datetime
 from time import sleep
 
 def generate_token(client_key, client_secret):
+    """
+    Generate access tokens
+    """
     url = 'https://open.tiktokapis.com/v2/oauth/token/'
     token_headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -22,6 +25,9 @@ def generate_token(client_key, client_secret):
 
 
 def generate_date_ranges(start_date, end_date):
+    """
+    Return a list of date ranges 
+    """
     date_ranges = []
     start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
     end_date = datetime.datetime.strptime(end_date, "%Y-%m-%d")
@@ -39,10 +45,12 @@ def generate_date_ranges(start_date, end_date):
 
 # Chunk longer search period into no more than 30 days due to TikTok's restriction
 def generate_request_params(search_query, start_date, end_date, cursor, search_id):
+    """
+    Return a list of oraganized params 
+    """
     date_ranges = generate_date_ranges(start_date, end_date)
-    
     params_list = []
-    
+
     for range_start, range_end in date_ranges:
         params_list.append({
             "query": {
@@ -66,7 +74,10 @@ def generate_request_params(search_query, start_date, end_date, cursor, search_i
 
 
 def fetch_tiktok(client_key, client_secret, search_query, start_date, end_date, cursor, search_id, sleep_timer=1, max_retries=3):
-
+    """
+    Return a list of videos based on params
+    """
+    
     access_token = generate_token(client_key, client_secret)
     
     endpoint = "https://open.tiktokapis.com/v2/research/video/query/?fields=id,video_description,create_time,region_code,share_count,view_count,like_count,comment_count,music_id,hashtag_names,username,effect_ids,playlist_id,voice_to_text,hashtag_info_list,sticker_info_list,video_mention_list,video_label"
