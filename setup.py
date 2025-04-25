@@ -6,7 +6,10 @@ setup(
     packages=find_packages(),
     author='Keenan Chen',
     author_email="cyt.keenan@gmail.com",
-    install_requires=[
+    install_requires=
+        [
         'requests'
-                     ]
+    ],
+    py_modules=['search'],
+
     )
