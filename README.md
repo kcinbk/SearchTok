@@ -1,5 +1,5 @@
 # About this project
-SearchTok allows you make API calls to TikTok's search endpoint and returns a list of raw data in JSON format. 
+SearchTok helps you to make API calls to TikTok's search endpoint and return a list of raw data in JSON format. 
 
 
 The advantage of this tool is that it:
